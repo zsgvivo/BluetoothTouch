@@ -37,10 +37,12 @@ public class DebugFragment extends Fragment {
                             public void run()
                             {
                                 MainActivity.mChatService.write(input.getText().toString());
+//                                MainActivity.mChatService.write("haha");
                             }
                         });
                     }
-                    input.setText("");
+//                    MainActivity.mChatService.write("www");
+                    //input.setText("");
                 }
                 else {
                     Log.e("debug", "mChatService == null");
