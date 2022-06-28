@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,6 +29,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
+import android.view.View;
 
 
 import com.viewpagerindicator.UnderlinePageIndicator;
@@ -670,4 +672,12 @@ public class MainActivity extends AppCompatActivity
             showToast(getString(R.string.connecting), Toast.LENGTH_SHORT);
         }
     }
+
+    // 广播自定义意图
+//    public void broadcastIntent(View view){
+//        Intent intent = new Intent();
+//        intent.setAction("cn.programmer.CUSTOM_INTENT");
+//        intent.setComponent(new ComponentName("cn.programmer","cn.programmer.MyReceiver"));
+//        sendBroadcast(intent);
+//    }
 }

@@ -25,8 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/nameText"
-            android:layout_marginBottom="@dimen/margin"
             android:layout_marginLeft="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin"
             android:text="@string/manufacturer"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -155,9 +155,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/runtimeText"
-            android:layout_margin="@dimen/margin"
-            android:text="@string/button"
-            android:checked="true" />
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:layout_marginEnd="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin"
+            android:checked="true"
+            android:text="@string/button" />
 
     </RelativeLayout>
 

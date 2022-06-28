@@ -37,7 +37,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter
     public static final int GRAPH_FRAGMENT = 2;
     public static final int PID_FRAGMENT = 3;
     public static final int INFO_FRAGMENT = 4;
-
+    public static final int DEBUG_FRAGMENT = 5;
     private Context context;
 
     public ViewPagerAdapter(Context context, FragmentManager fm)
@@ -69,6 +69,8 @@ public class ViewPagerAdapter extends FragmentPagerAdapter
                 return new PIDFragment();
             case 4:
                 return new InfoFragment();
+            case 5:
+                return new DebugFragment();
             default:
                 return null;
         }
@@ -78,7 +80,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter
     public int getCount()
     {
         // Return number of tabs
-        return 5;
+        return 6;
     }
 
     @Override
@@ -95,6 +97,8 @@ public class ViewPagerAdapter extends FragmentPagerAdapter
                 return "PID";
             case 4:
                 return "Info";
+            case 5:
+                return "Debug";
         }
         return null;
     }

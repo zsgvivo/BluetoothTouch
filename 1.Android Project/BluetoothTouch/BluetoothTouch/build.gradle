@@ -85,6 +85,7 @@ dependencies {
     //usbImplementation 'com.physicaloid:physicaloid:1.0'
     implementation project(path: ':ViewpagerIndicator')
     implementation project(path: ':GraphView')
+    implementation 'com.android.support:design:28.0.0'
     usbImplementation project(path: ':PhysicaloidLibrary')
 
 }

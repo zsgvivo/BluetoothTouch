@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../../../../layout/custom_preview.xml" value="0.1" />
+        <entry key="BluetoothTouch/res/layout/activity_main.xml" value="0.31439056396484377" />
+        <entry key="BluetoothTouch/res/layout/debug.xml" value="0.16176470588235295" />
+        <entry key="BluetoothTouch/res/layout/device_list.xml" value="0.394677734375" />
+        <entry key="BluetoothTouch/res/layout/device_name.xml" value="0.35333099365234377" />
+        <entry key="BluetoothTouch/res/layout/graph.xml" value="0.2845528455284553" />
+        <entry key="BluetoothTouch/res/layout/imu.xml" value="0.6345966958211856" />
+        <entry key="BluetoothTouch/res/layout/info.xml" value="0.20594482421875004" />
+        <entry key="BluetoothTouch/res/layout/joystick.xml" value="0.2357711791992188" />
+        <entry key="BluetoothTouch/res/layout/pid.xml" value="0.29995574951171877" />
+        <entry key="BluetoothTouch/res/layout/settings_dialog.xml" value="0.43433990478515616" />
+        <entry key="BluetoothTouch/res/menu/menu.xml" value="0.2640930175781249" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
       <profile-state>
