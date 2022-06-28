@@ -48,6 +48,7 @@ public class BluetoothChatService
     private final Handler mHandler;
     private ConnectThread mConnectThread;
     private ConnectedThread mConnectedThread;
+    public String ReceiveStr;
     private int mState;
 
     // Constants that indicate the current connection state
@@ -118,7 +119,6 @@ public class BluetoothChatService
             mConnectedThread.cancel();
             mConnectedThread = null;
         }
-
         //setState(STATE_NONE);
     }
 
@@ -230,11 +230,22 @@ public class BluetoothChatService
         }
         // Perform the write unsynchronized
         r.write(out);
+
     }
 
     public void write(String string)
     {
         write(string.getBytes());
+    }
+    public void read(){
+        ConnectedThread r;
+        // Synchronize a copy of the ConnectedThread
+        synchronized (this) {
+            if (mState != STATE_CONNECTED)
+                return;
+            r = mConnectedThread;
+        }
+        ReceiveStr = r.ReceiveData;
     }
 
     /**
@@ -379,6 +390,7 @@ public class BluetoothChatService
         private final BluetoothSocket mmSocket;
         private final InputStream mmInStream;
         private final OutputStream mmOutStream;
+        public String ReceiveData;
 
         public ConnectedThread(BluetoothSocket socket, String socketType)
         {
@@ -415,7 +427,9 @@ public class BluetoothChatService
                     if (mmInStream.available() > 0) { // Check if new data is available
                         bytes = mmInStream.read(buffer); // Read from the InputStream
 
+
                         String readMessage = new String(buffer, 0, bytes);
+                        ReceiveData = ReceiveData + readMessage;
                         String[] splitMessage = readMessage.split(",");
 
                         if (D) {

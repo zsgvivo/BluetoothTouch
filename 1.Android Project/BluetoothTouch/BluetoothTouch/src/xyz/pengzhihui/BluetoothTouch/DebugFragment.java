@@ -15,7 +15,7 @@ import android.widget.ToggleButton;
 
 public class DebugFragment extends Fragment {
     private static TextView receive;
-    protected static Button sendbutton;
+    protected static Button sendbutton, refreshbtn;
     private static TextInputEditText input;
     private Handler mHandler = new Handler();
     @Override
@@ -25,6 +25,7 @@ public class DebugFragment extends Fragment {
         receive = (TextView)v.findViewById(R.id.receive);
         sendbutton = (Button)v.findViewById(R.id.sendbtn);
         input = (TextInputEditText)v.findViewById(R.id.input);
+        refreshbtn = (Button)v.findViewById(R.id.Refresh);
         //发送所输入的信息
         sendbutton.setOnClickListener(new OnClickListener() {
             @Override
@@ -47,7 +48,28 @@ public class DebugFragment extends Fragment {
                 else {
                     Log.e("debug", "mChatService == null");
                 }
-
+            }
+        });
+        refreshbtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                MainActivity.mChatService.read();
+                Log.e("android", "refresh");
+                updateView();
+//                if (MainActivity.mChatService != null) {
+//                    if (MainActivity.mChatService.getState() == BluetoothChatService.STATE_CONNECTED){
+//                        mHandler.post(new Runnable()
+//                        {
+//                            public void run()
+//                            {
+//
+//                                MainActivity.mChatService.read();
+//                                MainActivity.mChatService.write("haha");
+//                            }
+//                        });
+//                    }
+//                }
+//                MainActivity.mChatService.read();
             }
         });
         updateView();
@@ -55,6 +77,11 @@ public class DebugFragment extends Fragment {
     }
 
     public static void updateView() {
+        MainActivity.mChatService.read();
+        if(MainActivity.mChatService.ReceiveStr != null){
+            receive.setText(MainActivity.mChatService.ReceiveStr);
+        }
+        Log.d("android", "uodate");
 
     }
 
