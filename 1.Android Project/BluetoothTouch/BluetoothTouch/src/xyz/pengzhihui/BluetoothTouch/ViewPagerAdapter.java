@@ -67,10 +67,12 @@ public class ViewPagerAdapter extends FragmentPagerAdapter
                 return new GraphFragment();
             case 3:
                 return new PIDFragment();
+//            case 4:
+//                return new InfoFragment();
             case 4:
-                return new InfoFragment();
-            case 5:
                 return new DebugFragment();
+            case 5:
+                return new ClickerFragment();
             default:
                 return null;
         }
@@ -95,10 +97,12 @@ public class ViewPagerAdapter extends FragmentPagerAdapter
                 return "Graph";
             case 3:
                 return "PID";
+//            case 4:
+//                return "Info";
             case 4:
-                return "Info";
-            case 5:
                 return "Debug";
+            case 5:
+                return "Clicker";
         }
         return null;
     }
