@@ -247,6 +247,19 @@ public class BluetoothChatService
         }
         ReceiveStr = r.ReceiveData;
     }
+    public void clear(){
+        ConnectedThread r;
+        // Synchronize a copy of the ConnectedThread
+        synchronized (this) {
+            if (mState != STATE_CONNECTED)
+                return;
+            r = mConnectedThread;
+        }
+        r.ReceiveData = "";
+        ReceiveStr = r.ReceiveData;
+
+
+    }
 
     /**
      * Indicate that the connection attempt failed and notify the UI Activity.

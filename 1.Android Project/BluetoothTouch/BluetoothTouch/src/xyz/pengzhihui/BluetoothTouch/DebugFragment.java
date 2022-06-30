@@ -1,5 +1,6 @@
 package xyz.pengzhihui.BluetoothTouch;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TextInputEditText;
@@ -19,6 +20,7 @@ public class DebugFragment extends Fragment {
     protected static Button sendbutton, refreshbtn;
     private static TextInputEditText input;
     private Handler mHandler = new Handler();
+    private Runnable mRunnable;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.debug, container, false);
@@ -57,7 +59,9 @@ public class DebugFragment extends Fragment {
             public void onClick(View v) {
 //                MainActivity.mChatService.read();
                 Log.d("android", "refresh");
+                MainActivity.mChatService.clear();
                 updateView();
+
 //                if (MainActivity.mChatService != null) {
 //                    if (MainActivity.mChatService.getState() == BluetoothChatService.STATE_CONNECTED){
 //                        mHandler.post(new Runnable()
@@ -83,6 +87,10 @@ public class DebugFragment extends Fragment {
         if(MainActivity.mChatService.ReceiveStr != null){
             receive.setText(MainActivity.mChatService.ReceiveStr);
         }
+//        int offset=receive.getLineCount()*(receive.getLineHeight());
+//        if(offset>receive.getHeight()){
+//            receive.scrollTo(0,offset-receive.getHeight());
+//        }
         Log.d("android", "uodate");
 
     }
@@ -90,6 +98,16 @@ public class DebugFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        updateView(); // When the user resumes the view, then update the values
+//        updateView(); // When the user resumes the view, then update the values
+        mRunnable = new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                mHandler.postDelayed(this, 500); // Update IMU data every 50ms
+                updateView();
+            }
+        };
+        mHandler.postDelayed(mRunnable, 50); // Update IMU data every 50ms
     }
 }
