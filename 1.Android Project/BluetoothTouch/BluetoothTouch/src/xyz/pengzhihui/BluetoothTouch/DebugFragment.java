@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ public class DebugFragment extends Fragment {
         sendbutton = (Button)v.findViewById(R.id.sendbtn);
         input = (TextInputEditText)v.findViewById(R.id.input);
         refreshbtn = (Button)v.findViewById(R.id.Refresh);
+        receive.setMovementMethod(ScrollingMovementMethod.getInstance());
         //发送所输入的信息
         sendbutton.setOnClickListener(new OnClickListener() {
             @Override
@@ -54,7 +56,7 @@ public class DebugFragment extends Fragment {
             @Override
             public void onClick(View v) {
 //                MainActivity.mChatService.read();
-                Log.e("android", "refresh");
+                Log.d("android", "refresh");
                 updateView();
 //                if (MainActivity.mChatService != null) {
 //                    if (MainActivity.mChatService.getState() == BluetoothChatService.STATE_CONNECTED){
