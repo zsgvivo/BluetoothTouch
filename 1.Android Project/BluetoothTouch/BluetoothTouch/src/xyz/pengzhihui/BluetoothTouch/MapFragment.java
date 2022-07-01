@@ -322,6 +322,6 @@ public class MapFragment extends Fragment {
                 break;
             }
         }
-        Print("all done!");
+        Print("all done!\n");
     }
 }

@@ -151,6 +151,16 @@ public class MainActivity extends AppCompatActivity
     public final static int responseStatusLength = 3;
     public final static int responsePairConfirmationLength = 1;
 
+    public final static String sendClickerButton = "AJ,";
+    public final static int clickerUp = 1;
+    public final static int clickerLeft = 2;
+    public final static int clickerRight = 3;
+    public final static int clickerStop = 0;
+    public final static int clickerSwitch = 4;
+
+
+
+
     @Override
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     protected void onCreate(Bundle savedInstanceState)

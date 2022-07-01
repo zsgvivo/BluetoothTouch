@@ -31,7 +31,7 @@ public class ClickerFragment extends Fragment {
                     if (MainActivity.mChatService.getState() == BluetoothChatService.STATE_CONNECTED) {
                         mHandler.post(new Runnable() {
                             public void run() {
-                                MainActivity.mChatService.write("1");
+                                MainActivity.mChatService.write(MainActivity.sendClickerButton + MainActivity.clickerUp + ";");
 //                                MainActivity.mChatService.write("haha");
                             }
                         });
@@ -46,7 +46,7 @@ public class ClickerFragment extends Fragment {
                     if (MainActivity.mChatService.getState() == BluetoothChatService.STATE_CONNECTED) {
                         mHandler.post(new Runnable() {
                             public void run() {
-                                MainActivity.mChatService.write("2");
+                                MainActivity.mChatService.write(MainActivity.sendClickerButton + MainActivity.clickerLeft + ";");
 //                                MainActivity.mChatService.write("haha");
                             }
                         });
@@ -61,7 +61,7 @@ public class ClickerFragment extends Fragment {
                     if (MainActivity.mChatService.getState() == BluetoothChatService.STATE_CONNECTED) {
                         mHandler.post(new Runnable() {
                             public void run() {
-                                MainActivity.mChatService.write("3");
+                                MainActivity.mChatService.write(MainActivity.sendClickerButton + MainActivity.clickerRight + ";");
 //                                MainActivity.mChatService.write("haha");
                             }
                         });
@@ -76,7 +76,7 @@ public class ClickerFragment extends Fragment {
                     if (MainActivity.mChatService.getState() == BluetoothChatService.STATE_CONNECTED) {
                         mHandler.post(new Runnable() {
                             public void run() {
-                                MainActivity.mChatService.write("0");
+                                MainActivity.mChatService.write(MainActivity.sendClickerButton + MainActivity.clickerStop + ";");
 //                                MainActivity.mChatService.write("haha");
                             }
                         });
@@ -91,7 +91,7 @@ public class ClickerFragment extends Fragment {
                     if (MainActivity.mChatService.getState() == BluetoothChatService.STATE_CONNECTED) {
                         mHandler.post(new Runnable() {
                             public void run() {
-                                MainActivity.mChatService.write("4");
+                                MainActivity.mChatService.write(MainActivity.sendClickerButton + MainActivity.clickerSwitch + ";");
 //                                MainActivity.mChatService.write("haha");
                             }
                         });
