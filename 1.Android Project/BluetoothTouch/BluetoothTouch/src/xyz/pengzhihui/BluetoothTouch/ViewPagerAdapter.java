@@ -73,6 +73,8 @@ public class ViewPagerAdapter extends FragmentPagerAdapter
                 return new DebugFragment();
             case 5:
                 return new ClickerFragment();
+            case 6:
+                return new MapFragment();
             default:
                 return null;
         }
@@ -82,7 +84,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter
     public int getCount()
     {
         // Return number of tabs
-        return 6;
+        return 7;
     }
 
     @Override
@@ -103,6 +105,8 @@ public class ViewPagerAdapter extends FragmentPagerAdapter
                 return "Debug";
             case 5:
                 return "Clicker";
+            case 6:
+                return "Map";
         }
         return null;
     }

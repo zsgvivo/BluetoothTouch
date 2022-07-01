@@ -91,7 +91,7 @@ public class DebugFragment extends Fragment {
 //        if(offset>receive.getHeight()){
 //            receive.scrollTo(0,offset-receive.getHeight());
 //        }
-        Log.d("android", "uodate");
+        Log.d("android", "update");
 
     }
 

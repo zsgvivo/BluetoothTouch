@@ -118,7 +118,22 @@ public class JoystickFragment extends Fragment implements JoystickView.OnJoystic
                         if (joystickReleased || (xValue == 0 && yValue == 0))
                             MainActivity.mChatService.write(MainActivity.sendStop);
                         else {
-                            String message = MainActivity.sendJoystickValues + d.format(xValue) + ',' + d.format(yValue) + ";";
+//                            String message = MainActivity.sendJoystickValues + d.format(xValue) + ',' + d.format(yValue) + ";";
+                            String xstr;
+                            String ystr;
+                            if(xValue >= 0){
+                                xstr = '+' + String.format("%.1f", xValue);
+                            }
+                            else{
+                                xstr = String.format("%.1f", xValue);
+                            }
+                            if(yValue >= 0){
+                                ystr = '+' + String.format("%.1f", yValue);
+                            }
+                            else{
+                                ystr = String.format("%.1f", yValue);
+                            }
+                            String message = MainActivity.sendJoystickValues + xstr + ',' + ystr + ';';
                             MainActivity.mChatService.write(message);
                             Log.d("pzhh", "run: " + message);
                         }

@@ -6,14 +6,15 @@
         <entry key="../../../../../../../../../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="../../../../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="BluetoothTouch/res/layout/activity_main.xml" value="0.31439056396484377" />
-        <entry key="BluetoothTouch/res/layout/clicker.xml" value="0.28229166666666666" />
+        <entry key="BluetoothTouch/res/layout/clicker.xml" value="0.3313868204752604" />
         <entry key="BluetoothTouch/res/layout/debug.xml" value="0.29374542236328127" />
         <entry key="BluetoothTouch/res/layout/device_list.xml" value="0.394677734375" />
         <entry key="BluetoothTouch/res/layout/device_name.xml" value="0.35333099365234377" />
         <entry key="BluetoothTouch/res/layout/graph.xml" value="0.2845528455284553" />
         <entry key="BluetoothTouch/res/layout/imu.xml" value="0.3129017495321231" />
-        <entry key="BluetoothTouch/res/layout/info.xml" value="0.20594482421875004" />
+        <entry key="BluetoothTouch/res/layout/info.xml" value="0.39426879882812504" />
         <entry key="BluetoothTouch/res/layout/joystick.xml" value="0.2357711791992188" />
+        <entry key="BluetoothTouch/res/layout/map.xml" value="0.3633111405392373" />
         <entry key="BluetoothTouch/res/layout/pid.xml" value="0.29995574951171877" />
         <entry key="BluetoothTouch/res/layout/settings_dialog.xml" value="0.43433990478515616" />
         <entry key="BluetoothTouch/res/menu/menu.xml" value="0.2640930175781249" />
