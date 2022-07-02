@@ -133,7 +133,7 @@ public class MapFragment extends Fragment {
         MapFragment.Print("Detect...\n");
         String str = "";
         String diststr = "";
-        int dist = 0;
+        int dist = 1;
         if (MainActivity.mChatService != null) {
             if (MainActivity.mChatService.getState() == BluetoothChatService.STATE_CONNECTED) {
                 MainActivity.mChatService.write(MapFragment.detectcommand);
@@ -162,7 +162,7 @@ public class MapFragment extends Fragment {
         if(mycar.Angle == 0){
             int x = mycar.Position.x;
             int y = mycar.Position.y;
-            while(x < mycar.Position.x + dist){
+            while(x < mycar.Position.x + dist && x < Constant.MapSize){
                 mymap[x][y].state = Constant.AVAILABLE;
                 x++;
             }
@@ -173,7 +173,7 @@ public class MapFragment extends Fragment {
         else if(mycar.Angle == 90){
             int x = mycar.Position.x ;
             int y = mycar.Position.y ;
-            while(y < mycar.Position.y + dist){
+            while(y < mycar.Position.y + dist && y < Constant.MapSize){
                 mymap[x][y].state = Constant.AVAILABLE;
                 y++;
             }
@@ -184,7 +184,7 @@ public class MapFragment extends Fragment {
         else if(mycar.Angle == 180){
             int x = mycar.Position.x;
             int y = mycar.Position.y;
-            while(x > mycar.Position.x - dist){
+            while(x > mycar.Position.x - dist && x >= 0){
                 mymap[x][y].state = Constant.AVAILABLE;
                 x--;
             }
@@ -195,7 +195,7 @@ public class MapFragment extends Fragment {
         else if(mycar.Angle == 270){
             int x = mycar.Position.x ;
             int y = mycar.Position.y ;
-            while(y > mycar.Position.y - dist){
+            while(y > mycar.Position.y - dist && y >= 0){
                 mymap[x][y].state = Constant.AVAILABLE;
                 y--;
             }
@@ -431,7 +431,7 @@ public class MapFragment extends Fragment {
         // public static Point myPoint;
 //        System.out.println("Hello World"); // 输出 Hello World
         // System.out.println(AVAILABLE);
-        myenv.printmap();
+//        myenv.printmap();
         mymap[0][0].state = Constant.AVAILABLE;
         printstate(mymap);
         detect();
