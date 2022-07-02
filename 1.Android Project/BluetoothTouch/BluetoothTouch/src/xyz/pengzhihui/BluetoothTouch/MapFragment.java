@@ -1,8 +1,10 @@
 package xyz.pengzhihui.BluetoothTouch;
 
+import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
@@ -13,34 +15,79 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ToggleButton;
 import java.lang.Math;
 // import java.util.Collection;
 // import java.util.Vector;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+
 public class MapFragment extends Fragment {
 
     private Handler mHandler = new Handler();
     private Runnable mRunnable;
     private static Button startbtn;
     private static TextView debug;
+    static final Handler myHandler = new Handler()
+    {
+        @Override
+        //重写handleMessage方法,根据msg中what的值判断是否执行后续操作
+        public void handleMessage(Message msg) {
+//            if(msg.what == 0x123)
+//            {
+////                imgchange.setImageResource(imgids[imgstart++ % 8]);
+//
+//            }
+            debug.setText(debugstr);
+
+        }
+    };
+
+
+    public static String debugstr;
     public static void Print(String str){
-        String s = debug.getText().toString();
-        s = s + str;
-        debug.setText(s);
+//        debugstr = debug.getText().toString();
+//        s = s + str;
+        debugstr = debugstr + str;
+//        Activity.runOnuiThread
+//        debug.setText(debugstr);
+        Log.d("maptext", "set");
+//        .runOnUiThread();
+        myHandler.sendEmptyMessage(0x123);
+        try
+        {
+            Thread.sleep(100);
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
+//        myHandler.sendEmptyMessage(0x123);
+
+
+
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.map, container, false);
         startbtn = (Button)v.findViewById(R.id.startbtn);
         debug = (TextView)v.findViewById(R.id.debug);
         debug.setMovementMethod(ScrollingMovementMethod.getInstance());
+        debugstr = "";
         startbtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Print("Start!\n");
-                Constant.reset();
-                test();
-//                Constant.reset();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Print("Start!\n");
+                        Constant.reset();
+                        test();
+                    }
+                }).start();
             }
         });
 
@@ -251,18 +298,27 @@ public class MapFragment extends Fragment {
     }
     public static void GoTo(Point target){
 //        System.out.println("go to " + target.x + " " + target.y + " ");
-        Print("go to (" + target.x + ", " + target.y + ") \n");
+        Print("Go To (" + target.x + ", " + target.y + ") \n");
         Vector path = findpath(mycar.Position, target);
 
         if(path != null){
             for(int i = path.size() - 1; i >= 0; i--){
                 gotoneighbor((Point)path.get(i));
             }
+//            try
+//            {
+//                Thread.sleep(1000);
+//            }
+//            catch(InterruptedException ex)
+//            {
+//                Thread.currentThread().interrupt();
+//            }
         }
         else{
 //            System.out.println("no path");
             Print("no path\n");
         }
+
     }
     public static void detectaround(){
         detect();
