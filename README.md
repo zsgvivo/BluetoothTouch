@@ -56,4 +56,41 @@ public final static int clickerLeft = 2;
 public final static int clickerRight = 3;
 public final static int clickerStop = 0;
 public final static int clickerSwitch = 4;
+
+public final static String sendCommand = "CD,";
+
 ```
+
+### 自动探测模式指令格式
+
+发送指令格式：`CD,(command);`
+
+command 所有取值: `left`, `right`, `move`, `detect`
+
+#### 左转90度
+
+app向智能车发送指令：`CD,left;`
+
+智能车左转90度完成后发回：`done`
+
+#### 右转90度
+
+app向智能车发送指令：`CD,right;`
+
+智能车右转90度完成后发回：`done`
+
+#### 前进1格
+
+app向智能车发送指令：`CD,move;`
+
+智能车前进1格完成后发回：`done`
+
+#### 超声波探测
+
+app向智能车发送指令：`CD,detect;`
+
+智能车探测完成后发回：`(dist)done`
+
+dist为探测得到小车前方最近障碍物距离小车的格数
+
+例如若小车在(0, 0)格向x轴正方向探测，发现(1, 0)是障碍物，则向app发回`1done`
