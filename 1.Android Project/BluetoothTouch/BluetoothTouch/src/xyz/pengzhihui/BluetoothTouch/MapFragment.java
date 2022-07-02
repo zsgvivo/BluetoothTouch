@@ -1,5 +1,6 @@
 package xyz.pengzhihui.BluetoothTouch;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -32,6 +33,17 @@ public class MapFragment extends Fragment {
     private Runnable mRunnable;
     private static Button startbtn;
     private static TextView debug;
+    public static Point pt;
+    public static Car mycar;
+    public static Environment myenv;
+    public static Point[][] mymap = new Point[Constant.MapSize][Constant.MapSize];
+    public static String leftcommand = MainActivity.sendCommand + "left" + ";";
+    public static String rightcommand = MainActivity.sendCommand +"right" + ";";
+    public static String movecommand = MainActivity.sendCommand + "move" + ";";
+    public static String detectcommand = MainActivity.sendCommand + "detect" + ";";
+    public static String commanddone = "done";
+
+
     static final Handler myHandler = new Handler()
     {
         @Override
@@ -43,6 +55,7 @@ public class MapFragment extends Fragment {
 //
 //            }
             debug.setText(debugstr);
+            refreshTextView(debug);
 
         }
     };
@@ -51,23 +64,18 @@ public class MapFragment extends Fragment {
     public static String debugstr;
     public static void Print(String str){
 //        debugstr = debug.getText().toString();
-//        s = s + str;
         debugstr = debugstr + str;
-//        Activity.runOnuiThread
-//        debug.setText(debugstr);
         Log.d("maptext", "set");
-//        .runOnUiThread();
         myHandler.sendEmptyMessage(0x123);
-        try
-        {
-            Thread.sleep(100);
-        }
-        catch(InterruptedException ex)
-        {
-            Thread.currentThread().interrupt();
-        }
+//        try
+//        {
+//            Thread.sleep(20);
+//        }
+//        catch(InterruptedException ex)
+//        {
+//            Thread.currentThread().interrupt();
+//        }
 //        myHandler.sendEmptyMessage(0x123);
-
 
 
     }
@@ -86,13 +94,22 @@ public class MapFragment extends Fragment {
                         Print("Start!\n");
                         Constant.reset();
                         test();
+                        Log.d("onclick", "done");
                     }
                 }).start();
+
             }
         });
 
         updateView();
         return v;
+    }
+
+    private static void refreshTextView(TextView textView){
+        int offset=textView.getLineCount()*textView.getLineHeight();
+        if(offset>(textView.getHeight()-textView.getLineHeight()-20)){
+            textView.scrollTo(0,offset-textView.getHeight()+textView.getLineHeight()+20);
+        }
     }
 
     public static void updateView() {
@@ -108,69 +125,130 @@ public class MapFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-//        updateView(); // When the user resumes the view, then update the values
-//        mRunnable = new Runnable()
-//        {
-//            @Override
-//            public void run()
-//            {
-//                mHandler.postDelayed(this, 500); // Update IMU data every 50ms
-//                updateView();
-//            }
-//        };
-//        mHandler.postDelayed(mRunnable, 50); // Update IMU data every 50ms
     }
-    public static Point pt;
-    public static Car mycar;
-    public static Environment myenv;
-    public static Point[][] mymap = new Point[Constant.MapSize][Constant.MapSize];
+
 
     public static void detect(){
         Constant.dectection_cnt++;
-        if(mycar.Angle == 0){
-            int x = mycar.Position.x + 1;
-            int y = mycar.Position.y;
-            while(x < Constant.MapSize){
-                mymap[x][y].state = myenv.getstate(x, y);
-                if (mymap[x][y].state == Constant.OCCUPIED){
-                    break;
+        MapFragment.Print("Detect...\n");
+        String str = "";
+        String diststr = "";
+        int dist = 0;
+        if (MainActivity.mChatService != null) {
+            if (MainActivity.mChatService.getState() == BluetoothChatService.STATE_CONNECTED) {
+                MainActivity.mChatService.write(MapFragment.detectcommand);
+                MainActivity.mChatService.clear();
+
+                while(true){
+                    try
+                    {
+                        Thread.sleep(500);
+                    }
+                    catch(InterruptedException ex)
+                    {
+                        Thread.currentThread().interrupt();
+                    }
+                    MainActivity.mChatService.read();
+                    str = MainActivity.mChatService.ReceiveStr;
+                    if(str.length() >= 5 && Objects.equals(str.substring(str.length() - 4, str.length()), MapFragment.commanddone)){
+                        MapFragment.Print("Done\n");
+                        diststr = str.substring(0, str.length() - 4);
+                        dist = Integer.parseInt(diststr);
+                        break;
+                    }
                 }
+            }
+        }
+        if(mycar.Angle == 0){
+            int x = mycar.Position.x;
+            int y = mycar.Position.y;
+            while(x < mycar.Position.x + dist){
+                mymap[x][y].state = Constant.AVAILABLE;
                 x++;
+            }
+            if(x < Constant.MapSize) {
+                mymap[x][y].state = Constant.OCCUPIED;
             }
         }
         else if(mycar.Angle == 90){
-            int x = mycar.Position.x;
-            int y = mycar.Position.y + 1;
-            while(y < Constant.MapSize){
-                mymap[x][y].state = myenv.getstate(x, y);
-                if (mymap[x][y].state == Constant.OCCUPIED){
-                    break;
-                }
+            int x = mycar.Position.x ;
+            int y = mycar.Position.y ;
+            while(y < mycar.Position.y + dist){
+                mymap[x][y].state = Constant.AVAILABLE;
                 y++;
+            }
+            if(y < Constant.MapSize) {
+                mymap[x][y].state = Constant.OCCUPIED;
             }
         }
         else if(mycar.Angle == 180){
-            int x = mycar.Position.x - 1;
+            int x = mycar.Position.x;
             int y = mycar.Position.y;
-            while(x >= 0){
-                mymap[x][y].state = myenv.getstate(x, y);
-                if (mymap[x][y].state == Constant.OCCUPIED){
-                    break;
-                }
+            while(x > mycar.Position.x - dist){
+                mymap[x][y].state = Constant.AVAILABLE;
                 x--;
+            }
+            if(x >= 0) {
+                mymap[x][y].state = Constant.OCCUPIED;
             }
         }
         else if(mycar.Angle == 270){
-            int x = mycar.Position.x;
-            int y = mycar.Position.y - 1;
-            while(y >= 0){
-                mymap[x][y].state = myenv.getstate(x, y);
-                if (mymap[x][y].state == Constant.OCCUPIED){
-                    break;
-                }
+            int x = mycar.Position.x ;
+            int y = mycar.Position.y ;
+            while(y > mycar.Position.y - dist){
+                mymap[x][y].state = Constant.AVAILABLE;
                 y--;
             }
+            if(y >= 0) {
+                mymap[x][y].state = Constant.OCCUPIED;
+            }
         }
+
+
+//        if(mycar.Angle == 0){
+//            int x = mycar.Position.x + 1;
+//            int y = mycar.Position.y;
+//            while(x < Constant.MapSize){
+//                mymap[x][y].state = myenv.getstate(x, y);
+//                if (mymap[x][y].state == Constant.OCCUPIED){
+//                    break;
+//                }
+//                x++;
+//            }
+//        }
+//        else if(mycar.Angle == 90){
+//            int x = mycar.Position.x;
+//            int y = mycar.Position.y + 1;
+//            while(y < Constant.MapSize){
+//                mymap[x][y].state = myenv.getstate(x, y);
+//                if (mymap[x][y].state == Constant.OCCUPIED){
+//                    break;
+//                }
+//                y++;
+//            }
+//        }
+//        else if(mycar.Angle == 180){
+//            int x = mycar.Position.x - 1;
+//            int y = mycar.Position.y;
+//            while(x >= 0){
+//                mymap[x][y].state = myenv.getstate(x, y);
+//                if (mymap[x][y].state == Constant.OCCUPIED){
+//                    break;
+//                }
+//                x--;
+//            }
+//        }
+//        else if(mycar.Angle == 270){
+//            int x = mycar.Position.x;
+//            int y = mycar.Position.y - 1;
+//            while(y >= 0){
+//                mymap[x][y].state = myenv.getstate(x, y);
+//                if (mymap[x][y].state == Constant.OCCUPIED){
+//                    break;
+//                }
+//                y--;
+//            }
+//        }
     }
     public static void printstate(Point[][] map){
 //        System.out.println("state map after " + Constant.dectection_cnt + " detections");

@@ -158,6 +158,8 @@ public class MainActivity extends AppCompatActivity
     public final static int clickerStop = 0;
     public final static int clickerSwitch = 4;
 
+    public final static String sendCommand = "CD,";
+
 
 
 
