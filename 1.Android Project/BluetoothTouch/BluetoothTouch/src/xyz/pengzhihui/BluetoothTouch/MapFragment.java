@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ToggleButton;
@@ -33,6 +34,11 @@ public class MapFragment extends Fragment {
     private Runnable mRunnable;
     private static Button startbtn;
     private static TextView debug;
+    private static EditText initx;
+    private static EditText inity;
+    private static EditText initangle;
+    private static EditText mapsize;
+
     public static Point pt;
     public static Car mycar;
     public static Environment myenv;
@@ -83,6 +89,11 @@ public class MapFragment extends Fragment {
         View v = inflater.inflate(R.layout.map, container, false);
         startbtn = (Button)v.findViewById(R.id.startbtn);
         debug = (TextView)v.findViewById(R.id.debug);
+        initx = (EditText)v.findViewById(R.id.initx);
+        inity = (EditText)v.findViewById(R.id.inity);
+        initangle = (EditText)v.findViewById(R.id.initangle);
+        mapsize = (EditText)v.findViewById(R.id.mapsize);
+
         debug.setMovementMethod(ScrollingMovementMethod.getInstance());
         debugstr = "";
         startbtn.setOnClickListener(new OnClickListener() {
@@ -383,14 +394,6 @@ public class MapFragment extends Fragment {
             for(int i = path.size() - 1; i >= 0; i--){
                 gotoneighbor((Point)path.get(i));
             }
-//            try
-//            {
-//                Thread.sleep(1000);
-//            }
-//            catch(InterruptedException ex)
-//            {
-//                Thread.currentThread().interrupt();
-//            }
         }
         else{
 //            System.out.println("no path");
@@ -419,7 +422,9 @@ public class MapFragment extends Fragment {
         return true;
     }
     public static void test(){
-        mycar = new Car(new Point(0, 0), 0);
+//        mycar = new Car(new Point(0, 0), 0);
+        Constant.MapSize = Integer.parseInt(mapsize.getText().toString());
+        mycar = new Car(new Point(Integer.parseInt(initx.getText().toString()), Integer.parseInt(inity.getText().toString())), Integer.parseInt(initangle.getText().toString()));
         mymap = new Point[Constant.MapSize][Constant.MapSize];
         myenv = new Environment(Constant.MapSize);
         for (int i = 0; i < Constant.MapSize; i++) {
@@ -427,20 +432,18 @@ public class MapFragment extends Fragment {
                 mymap[i][j] = new Point(i,j, Constant.UNEXPORED);
             }
         }
-
-        // public static Point myPoint;
-//        System.out.println("Hello World"); // 输出 Hello World
-        // System.out.println(AVAILABLE);
-//        myenv.printmap();
-        mymap[0][0].state = Constant.AVAILABLE;
-        printstate(mymap);
-        detect();
-        printstate(mymap);
-        mycar.turnleft();
-        detect();
-        printstate(mymap);
+        mymap[mycar.Position.x][mycar.Position.y].state = Constant.AVAILABLE;
         Vector havevisited = new Vector<Point>();
-        havevisited.add(mymap[0][0]);
+        printstate(mymap);
+//        detect();
+//        printstate(mymap);
+//        mycar.turnleft();
+//        detect();
+//        printstate(mymap);
+        detectaround();
+        havevisited.add(mymap[mycar.Position.x][mycar.Position.y]);
+        printstate(mymap);
+
         for(int i = 0; i < (Constant.MapSize * Constant.MapSize); i++){
             Vector border = getborder();
             for(int j = 0; j < border.size(); j++){
