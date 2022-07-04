@@ -65,29 +65,29 @@ public final static String sendCommand = "CD,";
 
 发送指令格式：`CD,(command);`
 
-command 所有取值: `left`, `right`, `move`, `detect`
+command 所有取值: `l(left)`, `r(right)`, `m(move)`, `d(detect)`
 
 #### 左转90度
 
-app向智能车发送指令：`CD,left;`
+app向智能车发送指令：`CD,l;`
 
 智能车左转90度完成后发回：`done`
 
 #### 右转90度
 
-app向智能车发送指令：`CD,right;`
+app向智能车发送指令：`CD,r;`
 
 智能车右转90度完成后发回：`done`
 
 #### 前进1格
 
-app向智能车发送指令：`CD,move;`
+app向智能车发送指令：`CD,m;`
 
 智能车前进1格完成后发回：`done`
 
 #### 超声波探测
 
-app向智能车发送指令：`CD,detect;`
+app向智能车发送指令：`CD,d;`
 
 智能车探测完成后发回：`(dist)done`
 
