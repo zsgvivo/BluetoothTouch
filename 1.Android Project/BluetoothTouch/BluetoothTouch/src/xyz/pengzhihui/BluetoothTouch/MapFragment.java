@@ -43,10 +43,10 @@ public class MapFragment extends Fragment {
     public static Car mycar;
     public static Environment myenv;
     public static Point[][] mymap = new Point[Constant.MapSize][Constant.MapSize];
-    public static String leftcommand = MainActivity.sendCommand + "left" + ";";
-    public static String rightcommand = MainActivity.sendCommand +"right" + ";";
-    public static String movecommand = MainActivity.sendCommand + "move" + ";";
-    public static String detectcommand = MainActivity.sendCommand + "detect" + ";";
+    public static String leftcommand = MainActivity.sendCommand + "l" + ";";
+    public static String rightcommand = MainActivity.sendCommand +"r" + ";";
+    public static String movecommand = MainActivity.sendCommand + "m" + ";";
+    public static String detectcommand = MainActivity.sendCommand + "d" + ";";
     public static String commanddone = "done";
 
 
@@ -62,7 +62,6 @@ public class MapFragment extends Fragment {
 //            }
             debug.setText(debugstr);
             refreshTextView(debug);
-
         }
     };
 
@@ -423,6 +422,7 @@ public class MapFragment extends Fragment {
     }
     public static void test(){
 //        mycar = new Car(new Point(0, 0), 0);
+        //init
         Constant.MapSize = Integer.parseInt(mapsize.getText().toString());
         mycar = new Car(new Point(Integer.parseInt(initx.getText().toString()), Integer.parseInt(inity.getText().toString())), Integer.parseInt(initangle.getText().toString()));
         mymap = new Point[Constant.MapSize][Constant.MapSize];
@@ -434,6 +434,7 @@ public class MapFragment extends Fragment {
         }
         mymap[mycar.Position.x][mycar.Position.y].state = Constant.AVAILABLE;
         Vector havevisited = new Vector<Point>();
+
         printstate(mymap);
 //        detect();
 //        printstate(mymap);
