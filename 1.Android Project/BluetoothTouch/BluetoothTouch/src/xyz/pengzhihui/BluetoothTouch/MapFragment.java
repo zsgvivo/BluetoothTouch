@@ -314,25 +314,7 @@ public class MapFragment extends Fragment {
         }
         return border;
     }
-    public static void turnto(Car mycar, int angle){
-        if((mycar.Angle - angle) % 360 == 0){
-            return;
-        }
-        if((mycar.Angle - angle) % 360 == 90){
-            mycar.turnright();
-            return;
-        }
-        if((mycar.Angle - angle) % 360 == 270){
-            mycar.turnleft();
-            return;
-        }
-        if((mycar.Angle - angle) % 360 == 180){
-            mycar.turnleft();
-            mycar.turnleft();
-            return;
-        }
 
-    }
     public static void gotoneighbor(Point p){
         if(mycar.Position.x == p.x && mycar.Position.y == p.y){
             return;
@@ -344,27 +326,27 @@ public class MapFragment extends Fragment {
             if(p.y > mycar.Position.y){
                 // mycar.turnreset();
                 // mycar.turnleft();
-                turnto(mycar, 90);
+                mycar.turnto(90);
                 mycar.move(1);
             }
             else{
                 // mycar.turnreset();
                 // mycar.turnright();
-                turnto(mycar, 270);
+                mycar.turnto(270);
                 mycar.move(1);
             }
         }
         else if(p.y == mycar.Position.y){
             if(p.x > mycar.Position.x){
                 // mycar.turnreset();
-                turnto(mycar, 0);
+                mycar.turnto(0);
                 mycar.move(1);
             }
             else{
                 // mycar.turnreset();
                 // mycar.turnright();
                 // mycar.turnright();
-                turnto(mycar, 180);
+                mycar.turnto(180);
                 mycar.move(1);
             }
         }

@@ -105,6 +105,24 @@ public class Car {
             turnleft();
         }
     }
+    public void turnto(int angle){
+        if((Angle - angle) % 360 == 0){
+            return;
+        }
+        if((Angle - angle) % 360 == 90){
+            turnright();
+            return;
+        }
+        if((Angle - angle) % 360 == 270){
+            turnleft();
+            return;
+        }
+        if((Angle - angle) % 360 == 180){
+            turnleft();
+            turnleft();
+            return;
+        }
+    }
     public void move(int dist){
         MapFragment.Print("Move...\n");
 
@@ -136,7 +154,7 @@ public class Car {
 //                        break;
 //                    }
                     if(str.length() >= MapFragment.commanddone.length() && Objects.equals(str.substring(str.length() - MapFragment.commanddone.length(), str.length()), MapFragment.commanddone)){
-                            MapFragment.Print("Done\n");
+                        MapFragment.Print("Done\n");
                         break;
                     }
 //                    MainActivity.mChatService.clear();
