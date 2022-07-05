@@ -71,26 +71,41 @@ command 所有取值: `l(left)`, `r(right)`, `m(move)`, `d(detect)`
 
 app向智能车发送指令：`CD,l;`
 
-智能车左转90度完成后发回：`done`
+智能车左转90度完成后发回：`Z`
 
 #### 右转90度
 
 app向智能车发送指令：`CD,r;`
 
-智能车右转90度完成后发回：`done`
+智能车右转90度完成后发回：`Z`
 
 #### 前进1格
 
 app向智能车发送指令：`CD,m;`
 
-智能车前进1格完成后发回：`done`
+智能车前进1格完成后发回：`Z`
 
 #### 超声波探测
 
 app向智能车发送指令：`CD,d;`
 
-智能车探测完成后发回：`(dist)done`
+智能车探测完成后发回：`(dist)`
 
 dist为探测得到小车前方最近障碍物距离小车的格数
 
-例如若小车在(0, 0)格向x轴正方向探测，发现(1, 0)是障碍物，则向app发回`1done`
+例如若小车在(0, 0)格向x轴正方向探测，发现(1, 0)是障碍物，则向app发回`1`
+
+### 遥控器指令格式
+
+`AJ,(cmd);`
+
+cmd取值：
+
+```java
+public final static int clickerUp = 1;
+public final static int clickerLeft = 2;
+public final static int clickerRight = 3;
+public final static int clickerStop = 0;
+public final static int clickerSwitch = 4;
+```
+
