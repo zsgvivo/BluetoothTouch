@@ -109,15 +109,15 @@ public class Car {
         if((Angle - angle) % 360 == 0){
             return;
         }
-        if((Angle - angle) % 360 == 90){
+        if((Angle - angle - 90) % 360 == 0){
             turnright();
             return;
         }
-        if((Angle - angle) % 360 == 270){
+        if((Angle - angle - 270) % 360 == 0){
             turnleft();
             return;
         }
-        if((Angle - angle) % 360 == 180){
+        if((Angle - angle - 180) % 360 == 0){
             turnleft();
             turnleft();
             return;

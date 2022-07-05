@@ -7,11 +7,6 @@ public class Constant {
     public static final int OCCUPIED = 2;
     public static int MapSize = 6;
     public static int dectection_cnt = 0;
-    //init command
-    public static final String TurnLeft = "TurnLeft";
-    public static final String TurnRight = "TurnRight";
-    public static final String Move = "Move";
-    public static final String Detect = "Detect";
     public static void reset(){
         dectection_cnt = 0;
     }

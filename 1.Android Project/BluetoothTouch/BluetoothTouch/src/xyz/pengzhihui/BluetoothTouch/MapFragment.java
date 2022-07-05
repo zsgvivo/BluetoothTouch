@@ -404,15 +404,39 @@ public class MapFragment extends Fragment {
             Print("no path\n");
         }
     }
-    public static void detectaround(){
-        detect();
-        mycar.turnleft();
-        detect();
-        mycar.turnleft();
-        detect();
-        mycar.turnleft();
-        detect();
+    public static boolean needdetect(int angle) {
+        int dx = (int) (Math.cos(angle * Math.PI / 180));
+        int dy = (int) (Math.sin(angle * Math.PI / 180));
+        int X = mycar.Position.x;
+        int Y = mycar.Position.y;
+        while (X < Constant.MapSize && X >= 0 && Y < Constant.MapSize && Y >= 0) {
+            if (mymap[X][Y].state == Constant.OCCUPIED) {
+                break;
+            }
+            if (mymap[X][Y].state == Constant.UNEXPORED) {
+                return true;
+            }
+            X = X + dx;
+            Y = Y + dy;
+        }
+        return false;
+    }
+
+    public static void detectaround() {
+        int tem = mycar.Angle;
+        for (int idx = 0; idx < 4; idx++) {
+            if (needdetect(tem + idx * 90) == true) {
+                mycar.turnto(tem + idx * 90);
+                detect();
+            }
+        }
+        // detect();
         // mycar.turnleft();
+        // detect();
+        // mycar.turnleft();
+        // detect();
+        // mycar.turnleft();
+        // detect();
     }
     public static boolean allexplored(){
         for(int i = 0; i < Constant.MapSize; i++){
