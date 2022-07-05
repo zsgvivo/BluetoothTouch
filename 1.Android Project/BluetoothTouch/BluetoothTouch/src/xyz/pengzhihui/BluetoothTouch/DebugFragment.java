@@ -87,10 +87,10 @@ public class DebugFragment extends Fragment {
         if(MainActivity.mChatService.ReceiveStr != null){
             receive.setText(MainActivity.mChatService.ReceiveStr);
         }
-//        int offset=receive.getLineCount()*(receive.getLineHeight());
-//        if(offset>receive.getHeight()){
-//            receive.scrollTo(0,offset-receive.getHeight());
-//        }
+        int offset=receive.getLineCount()*(receive.getLineHeight());
+        if(offset>receive.getHeight()){
+            receive.scrollTo(0,offset-receive.getHeight());
+        }
         Log.d("android", "update");
 
     }
