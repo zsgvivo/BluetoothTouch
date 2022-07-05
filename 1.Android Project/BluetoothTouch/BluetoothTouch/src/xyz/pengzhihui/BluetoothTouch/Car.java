@@ -43,7 +43,7 @@ public class Car {
 //                    if(Objects.equals(str, MapFragment.commanddone)){
 //                        break;
 //                    }
-                    if(str.length() >= 4 && Objects.equals(str.substring(str.length() - 4, str.length()), MapFragment.commanddone)){
+                    if(str.length() >= MapFragment.commanddone.length() && Objects.equals(str.substring(str.length() - MapFragment.commanddone.length(), str.length()), MapFragment.commanddone)){
                         MapFragment.Print("Done\n");
                         break;
                     }
@@ -81,7 +81,7 @@ public class Car {
 //                    if(Objects.equals(str, MapFragment.commanddone)){
 //                        break;
 //                    }
-                    if(str.length() >= 4 && Objects.equals(str.substring(str.length() - 4, str.length()), MapFragment.commanddone)){
+                    if(str.length() >= MapFragment.commanddone.length() && Objects.equals(str.substring(str.length() - MapFragment.commanddone.length(), str.length()), MapFragment.commanddone)){
                         MapFragment.Print("Done\n");
                         break;
                     }
@@ -135,8 +135,8 @@ public class Car {
 //                    if(Objects.equals(str, MapFragment.commanddone)){
 //                        break;
 //                    }
-                    if(str.length() >= 4 && Objects.equals(str.substring(str.length() - 4, str.length()), MapFragment.commanddone)){
-                        MapFragment.Print("Done\n");
+                    if(str.length() >= MapFragment.commanddone.length() && Objects.equals(str.substring(str.length() - MapFragment.commanddone.length(), str.length()), MapFragment.commanddone)){
+                            MapFragment.Print("Done\n");
                         break;
                     }
 //                    MainActivity.mChatService.clear();

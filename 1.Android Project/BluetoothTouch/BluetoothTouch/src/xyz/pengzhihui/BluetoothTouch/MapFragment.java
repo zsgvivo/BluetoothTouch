@@ -47,7 +47,7 @@ public class MapFragment extends Fragment {
     public static String rightcommand = MainActivity.sendCommand +"r" + ";";
     public static String movecommand = MainActivity.sendCommand + "m" + ";";
     public static String detectcommand = MainActivity.sendCommand + "d" + ";";
-    public static String commanddone = "done";
+    public static String commanddone = "Z";
 
 
     static final Handler myHandler = new Handler()
@@ -160,10 +160,10 @@ public class MapFragment extends Fragment {
                     }
                     MainActivity.mChatService.read();
                     str = MainActivity.mChatService.ReceiveStr;
-                    if(str.length() >= 5 && Objects.equals(str.substring(str.length() - 4, str.length()), MapFragment.commanddone)){
+                    if(str.length() >= 1){
                         MapFragment.Print("Done\n");
-                        diststr = str.substring(0, str.length() - 4);
-                        dist = Integer.parseInt(diststr);
+//                        diststr = str.substring(0, str.length() - 4);
+                        dist = Integer.parseInt(str);
                         break;
                     }
                 }
