@@ -166,6 +166,14 @@ public class MapFragment extends Fragment {
                         if(d >= '0' && d <= '9') {
                             dist = Integer.parseInt(str.substring(str.length() - 1));
                             MapFragment.Print("Done\n");
+                            try
+                            {
+                                Thread.sleep(1000);
+                            }
+                            catch(InterruptedException ex)
+                            {
+                                Thread.currentThread().interrupt();
+                            }
                             break;
                         }
                     }

@@ -45,6 +45,14 @@ public class Car {
 //                    }
                     if(str.length() >= MapFragment.commanddone.length() && Objects.equals(str.substring(str.length() - MapFragment.commanddone.length(), str.length()), MapFragment.commanddone)){
                         MapFragment.Print("Done\n");
+                        try
+                        {
+                            Thread.sleep(1000);
+                        }
+                        catch(InterruptedException ex)
+                        {
+                            Thread.currentThread().interrupt();
+                        }
                         break;
                     }
 //                    MainActivity.mChatService.clear();
@@ -83,6 +91,14 @@ public class Car {
 //                    }
                     if(str.length() >= MapFragment.commanddone.length() && Objects.equals(str.substring(str.length() - MapFragment.commanddone.length(), str.length()), MapFragment.commanddone)){
                         MapFragment.Print("Done\n");
+                        try
+                        {
+                            Thread.sleep(1000);
+                        }
+                        catch(InterruptedException ex)
+                        {
+                            Thread.currentThread().interrupt();
+                        }
                         break;
                     }
 //                    MainActivity.mChatService.clear();
@@ -155,6 +171,14 @@ public class Car {
 //                    }
                     if(str.length() >= MapFragment.commanddone.length() && Objects.equals(str.substring(str.length() - MapFragment.commanddone.length(), str.length()), MapFragment.commanddone)){
                         MapFragment.Print("Done\n");
+                        try
+                        {
+                            Thread.sleep(1000);
+                        }
+                        catch(InterruptedException ex)
+                        {
+                            Thread.currentThread().interrupt();
+                        }
                         break;
                     }
 //                    MainActivity.mChatService.clear();
