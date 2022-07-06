@@ -34,6 +34,8 @@ public class MapFragment extends Fragment {
     private Runnable mRunnable;
     private static Button startbtn;
     private static TextView debug;
+    private static TextView positiontext;
+    private static TextView angletext;
     private static EditText initx;
     private static EditText inity;
     private static EditText initangle;
@@ -62,6 +64,8 @@ public class MapFragment extends Fragment {
 //            }
             debug.setText(debugstr);
             refreshTextView(debug);
+            positiontext.setText("car position:(" + mycar.Position.x + ", " + mycar.Position.y + ")");
+            angletext.setText("car angle: " + mycar.Angle);
         }
     };
 
@@ -92,6 +96,8 @@ public class MapFragment extends Fragment {
         inity = (EditText)v.findViewById(R.id.inity);
         initangle = (EditText)v.findViewById(R.id.initangle);
         mapsize = (EditText)v.findViewById(R.id.mapsize);
+        positiontext = (TextView)v.findViewById(R.id.carposition);
+        angletext = (TextView)v.findViewById(R.id.carangle);
 
         debug.setMovementMethod(ScrollingMovementMethod.getInstance());
         debugstr = "";

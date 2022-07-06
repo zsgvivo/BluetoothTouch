@@ -27,7 +27,7 @@
             android:scrollbars="vertical">
 
             <TableLayout
-                android:layout_width="214dp"
+                android:layout_width="210dp"
                 android:layout_height="154dp">
 
                 <TableRow
@@ -100,17 +100,48 @@
 
             </TableLayout>
 
-            <Button
-                android:id="@+id/startbtn"
-                android:layout_width="75dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text="start" />
+            <TableLayout
+                android:layout_width="138dp"
+                android:layout_height="154dp">
 
-            <TableRow
-                android:layout_width="105dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/carposition"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="car position:" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/carangle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="car angle:" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/startbtn"
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:text="start" />
+                </TableRow>
+            </TableLayout>
 
 
         </LinearLayout>
