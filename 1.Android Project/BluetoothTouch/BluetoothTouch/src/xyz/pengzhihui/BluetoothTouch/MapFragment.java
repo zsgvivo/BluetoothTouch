@@ -161,10 +161,13 @@ public class MapFragment extends Fragment {
                     MainActivity.mChatService.read();
                     str = MainActivity.mChatService.ReceiveStr;
                     if(str.length() >= 1){
-                        MapFragment.Print("Done\n");
 //                        diststr = str.substring(0, str.length() - 4);
-                        dist = Integer.parseInt(str);
-                        break;
+                        char d = str.charAt(str.length() - 1);
+                        if(d >= '0' && d <= '9') {
+                            dist = Integer.parseInt(str.substring(str.length() - 1));
+                            MapFragment.Print("Done\n");
+                            break;
+                        }
                     }
                 }
             }
