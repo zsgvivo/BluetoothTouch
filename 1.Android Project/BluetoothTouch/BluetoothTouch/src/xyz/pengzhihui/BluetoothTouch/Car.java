@@ -44,6 +44,7 @@ public class Car {
 //                        break;
 //                    }
                     if(str.length() >= MapFragment.commanddone.length() && Objects.equals(str.substring(str.length() - MapFragment.commanddone.length(), str.length()), MapFragment.commanddone)){
+                        MapFragment.Print("receive: " + str + "\n");
                         MapFragment.Print("Done\n");
                         try
                         {
@@ -90,6 +91,7 @@ public class Car {
 //                        break;
 //                    }
                     if(str.length() >= MapFragment.commanddone.length() && Objects.equals(str.substring(str.length() - MapFragment.commanddone.length(), str.length()), MapFragment.commanddone)){
+                        MapFragment.Print("receive: " + str + "\n");
                         MapFragment.Print("Done\n");
                         try
                         {
@@ -170,6 +172,7 @@ public class Car {
 //                        break;
 //                    }
                     if(str.length() >= MapFragment.commanddone.length() && Objects.equals(str.substring(str.length() - MapFragment.commanddone.length(), str.length()), MapFragment.commanddone)){
+                        MapFragment.Print("receive: " + str + "\n");
                         MapFragment.Print("Done\n");
                         try
                         {

@@ -70,9 +70,9 @@ public class ViewPagerAdapter extends FragmentPagerAdapter
 //            case 4:
 //                return new InfoFragment();
             case 4:
-                return new DebugFragment();
-            case 5:
                 return new ClickerFragment();
+            case 5:
+                return new DebugFragment();
             case 6:
                 return new MapFragment();
             default:
@@ -102,9 +102,9 @@ public class ViewPagerAdapter extends FragmentPagerAdapter
 //            case 4:
 //                return "Info";
             case 4:
-                return "Debug";
-            case 5:
                 return "Clicker";
+            case 5:
+                return "Debug";
             case 6:
                 return "Map";
         }

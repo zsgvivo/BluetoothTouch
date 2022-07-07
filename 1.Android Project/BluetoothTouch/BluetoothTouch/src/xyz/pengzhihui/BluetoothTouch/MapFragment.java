@@ -171,6 +171,7 @@ public class MapFragment extends Fragment {
                         char d = str.charAt(str.length() - 1);
                         if(d >= '0' && d <= '9') {
                             dist = Integer.parseInt(str.substring(str.length() - 1));
+                            MapFragment.Print("receive: " + str + "\n");
                             MapFragment.Print("Done\n");
                             try
                             {
