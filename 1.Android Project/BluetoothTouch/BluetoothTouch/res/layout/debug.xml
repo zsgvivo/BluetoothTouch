@@ -73,6 +73,7 @@
             android:fadeScrollbars="false"
             android:focusable="true"
             android:focusableInTouchMode="true"
+            android:hint="receive"
             android:isScrollContainer="true"
             android:marqueeRepeatLimit="marquee_forever"
             android:overScrollMode="always"
@@ -80,7 +81,6 @@
             android:scrollbars="vertical"
             android:scrollHorizontally="false"
             android:singleLine="false"
-            android:text="receive"
             android:verticalScrollbarPosition="right"
             app:lineHeight="10dp" />
 
