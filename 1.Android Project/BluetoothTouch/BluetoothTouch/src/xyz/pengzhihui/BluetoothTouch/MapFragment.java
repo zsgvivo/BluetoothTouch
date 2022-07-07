@@ -495,8 +495,22 @@ public class MapFragment extends Fragment {
             Vector border = getborder();
             // for (int j = 0; j < border.size(); j++) {
             // Point p = (Point) border.get(j);
-            if(border.size() != 0 ){
+//            if(border.size() != 0 ){
+//                Point p = (Point) border.get(0);
+//                if (!havevisited.contains(p)) {
+//                    GoTo(p);
+//                    havevisited.add(p);
+//                    detectaround();
+//                    printstate(mymap);
+//                }
+//            }
+            if(border.size() > 0){
                 Point p = (Point) border.get(0);
+                for(int j = 0; j < border.size(); j++){
+                    if(findpath(mycar.Position, p).size() > findpath(mycar.Position, (Point) border.get(j)).size()){
+                        p = (Point) border.get(j);//find closest border point as p
+                    }
+                }
                 if (!havevisited.contains(p)) {
                     GoTo(p);
                     havevisited.add(p);
