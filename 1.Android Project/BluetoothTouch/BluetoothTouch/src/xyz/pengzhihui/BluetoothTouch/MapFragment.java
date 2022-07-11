@@ -50,6 +50,7 @@ public class MapFragment extends Fragment {
     public static String movecommand = MainActivity.sendCommand + "m" + ";";
     public static String detectcommand = MainActivity.sendCommand + "d" + ";";
     public static String commanddone = "Z";
+    public static String startcommand = MainActivity.sendCommand + "a" + ";";
 
 
     static final Handler myHandler = new Handler()
@@ -109,6 +110,11 @@ public class MapFragment extends Fragment {
                     public void run() {
                         Print("Start!\n");
                         Constant.reset();
+                        if (MainActivity.mChatService != null) {
+                            if (MainActivity.mChatService.getState() == BluetoothChatService.STATE_CONNECTED) {
+                                MainActivity.mChatService.write(startcommand);
+                            }
+                        }
                         test();
                         Log.d("onclick", "done");
                     }
