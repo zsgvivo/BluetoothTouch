@@ -48,7 +48,7 @@ public class Car {
                         MapFragment.Print("Done\n");
                         try
                         {
-                            Thread.sleep(1000);
+                            Thread.sleep(500);
                         }
                         catch(InterruptedException ex)
                         {
@@ -95,7 +95,7 @@ public class Car {
                         MapFragment.Print("Done\n");
                         try
                         {
-                            Thread.sleep(1000);
+                            Thread.sleep(500);
                         }
                         catch(InterruptedException ex)
                         {
@@ -176,7 +176,7 @@ public class Car {
                         MapFragment.Print("Done\n");
                         try
                         {
-                            Thread.sleep(1000);
+                            Thread.sleep(500);
                         }
                         catch(InterruptedException ex)
                         {
