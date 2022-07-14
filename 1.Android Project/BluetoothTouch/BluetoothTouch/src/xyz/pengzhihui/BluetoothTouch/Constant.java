@@ -7,6 +7,7 @@ public class Constant {
     public static final int OCCUPIED = 2;
     public static int MapSize = 6;
     public static int dectection_cnt = 0;
+    public static int valid_dist = 5;
     public static void reset(){
         dectection_cnt = 0;
     }

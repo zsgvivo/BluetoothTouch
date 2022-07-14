@@ -40,6 +40,7 @@ public class MapFragment extends Fragment {
     private static EditText inity;
     private static EditText initangle;
     private static EditText mapsize;
+    private static EditText validdist;
 
     public static Point pt;
     public static Car mycar;
@@ -99,6 +100,7 @@ public class MapFragment extends Fragment {
         mapsize = (EditText)v.findViewById(R.id.mapsize);
         positiontext = (TextView)v.findViewById(R.id.carposition);
         angletext = (TextView)v.findViewById(R.id.carangle);
+        validdist = (EditText)v.findViewById(R.id.valid_dist);
 
         debug.setMovementMethod(ScrollingMovementMethod.getInstance());
         debugstr = "";
@@ -181,7 +183,7 @@ public class MapFragment extends Fragment {
                             MapFragment.Print("Done\n");
                             try
                             {
-                                Thread.sleep(1000);
+                                Thread.sleep(500);
                             }
                             catch(InterruptedException ex)
                             {
@@ -193,50 +195,70 @@ public class MapFragment extends Fragment {
                 }
             }
         }
-        if(mycar.Angle == 0){
-            int x = mycar.Position.x;
-            int y = mycar.Position.y;
-            while(x < mycar.Position.x + dist && x < Constant.MapSize){
-                mymap[x][y].state = Constant.AVAILABLE;
-                x++;
-            }
-            if(x < Constant.MapSize) {
+        int dx = (int) (Math.cos(mycar.Angle * Math.PI / 180));
+        int dy = (int) (Math.sin(mycar.Angle * Math.PI / 180));
+        int cnt = 0;
+        int x = mycar.Position.x;
+        int y = mycar.Position.y;
+        while(cnt < dist && x >=0 && x < Constant.MapSize && y >= 0 && y < Constant.MapSize && cnt < Constant.valid_dist){
+            mymap[x][y].state = Constant.AVAILABLE;
+            x += dx;
+            y += dy;
+            cnt ++;
+        }
+        if(x >= 0 && x < Constant.MapSize && y >= 0 && y < Constant.MapSize){
+            if(cnt == dist){
                 mymap[x][y].state = Constant.OCCUPIED;
             }
-        }
-        else if(mycar.Angle == 90){
-            int x = mycar.Position.x ;
-            int y = mycar.Position.y ;
-            while(y < mycar.Position.y + dist && y < Constant.MapSize){
+            else {
                 mymap[x][y].state = Constant.AVAILABLE;
-                y++;
-            }
-            if(y < Constant.MapSize) {
-                mymap[x][y].state = Constant.OCCUPIED;
             }
         }
-        else if(mycar.Angle == 180){
-            int x = mycar.Position.x;
-            int y = mycar.Position.y;
-            while(x > mycar.Position.x - dist && x >= 0){
-                mymap[x][y].state = Constant.AVAILABLE;
-                x--;
-            }
-            if(x >= 0) {
-                mymap[x][y].state = Constant.OCCUPIED;
-            }
-        }
-        else if(mycar.Angle == 270){
-            int x = mycar.Position.x ;
-            int y = mycar.Position.y ;
-            while(y > mycar.Position.y - dist && y >= 0){
-                mymap[x][y].state = Constant.AVAILABLE;
-                y--;
-            }
-            if(y >= 0) {
-                mymap[x][y].state = Constant.OCCUPIED;
-            }
-        }
+
+//        if(mycar.Angle == 0){
+//            int x = mycar.Position.x;
+//            int y = mycar.Position.y;
+//            while(x < mycar.Position.x + dist && x < Constant.MapSize){
+//                mymap[x][y].state = Constant.AVAILABLE;
+//                x++;
+//            }
+//            if(x < Constant.MapSize) {
+//                mymap[x][y].state = Constant.OCCUPIED;
+//            }
+//        }
+//        else if(mycar.Angle == 90){
+//            int x = mycar.Position.x ;
+//            int y = mycar.Position.y ;
+//            while(y < mycar.Position.y + dist && y < Constant.MapSize){
+//                mymap[x][y].state = Constant.AVAILABLE;
+//                y++;
+//            }
+//            if(y < Constant.MapSize) {
+//                mymap[x][y].state = Constant.OCCUPIED;
+//            }
+//        }
+//        else if(mycar.Angle == 180){
+//            int x = mycar.Position.x;
+//            int y = mycar.Position.y;
+//            while(x > mycar.Position.x - dist && x >= 0){
+//                mymap[x][y].state = Constant.AVAILABLE;
+//                x--;
+//            }
+//            if(x >= 0) {
+//                mymap[x][y].state = Constant.OCCUPIED;
+//            }
+//        }
+//        else if(mycar.Angle == 270){
+//            int x = mycar.Position.x ;
+//            int y = mycar.Position.y ;
+//            while(y > mycar.Position.y - dist && y >= 0){
+//                mymap[x][y].state = Constant.AVAILABLE;
+//                y--;
+//            }
+//            if(y >= 0) {
+//                mymap[x][y].state = Constant.OCCUPIED;
+//            }
+//        }
 
 
 //        if(mycar.Angle == 0){
@@ -433,7 +455,8 @@ public class MapFragment extends Fragment {
         int dy = (int) (Math.sin(angle * Math.PI / 180));
         int X = mycar.Position.x;
         int Y = mycar.Position.y;
-        while (X < Constant.MapSize && X >= 0 && Y < Constant.MapSize && Y >= 0) {
+        int cnt = 0;
+        while (X < Constant.MapSize && X >= 0 && Y < Constant.MapSize && Y >= 0 && cnt <= Constant.valid_dist) {
             if (mymap[X][Y].state == Constant.OCCUPIED) {
                 break;
             }
@@ -442,6 +465,7 @@ public class MapFragment extends Fragment {
             }
             X = X + dx;
             Y = Y + dy;
+            cnt += 1;
         }
         return false;
     }
@@ -476,6 +500,7 @@ public class MapFragment extends Fragment {
 //        mycar = new Car(new Point(0, 0), 0);
         //init
         Constant.MapSize = Integer.parseInt(mapsize.getText().toString());
+        Constant.valid_dist = Integer.parseInt(validdist.getText().toString());
         mycar = new Car(new Point(Integer.parseInt(initx.getText().toString()), Integer.parseInt(inity.getText().toString())), Integer.parseInt(initangle.getText().toString()));
         mymap = new Point[Constant.MapSize][Constant.MapSize];
         myenv = new Environment(Constant.MapSize);
